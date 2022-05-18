@@ -4033,6 +4033,7 @@
 
     <script>
         let monkey_data = {};
+        let monkey_counter = 0;
         for(let tn = 1; tn <= 11; tn++) {
         var t = document.getElementById('mtable' + tn.toString());
         if(t) {
@@ -4054,9 +4055,13 @@
                     try {
                         let image_name = data.entities[key].claims.P18[0].mainsnak.datavalue.value.replace(/ /g,"_");
                         //Get image name out of the json object then " " replace with underscores
+                        
                         let hash = CryptoJS.MD5(image_name).toString();
-                        //console.log(title + " : " + image_url + image_name);
-                        monkey_data[title] = image_url + hash[0] + "/" + hash.substring(0,2) + "/" + image_name;
+                        monkey_data[monkey_counter] = {
+                            name: title,
+                            url: image_url + hash[0] + "/" + hash.substring(0,2) + "/" + image_name
+                        };
+                        monkey_counter++;
                     } catch (TypeError) {}
                 });
                 }

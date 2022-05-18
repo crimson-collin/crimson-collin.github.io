@@ -1,7 +1,54 @@
 <!DOCTYPE html>
 
+<script src="./unique_monkey.js"></script>
+<script src="monkeysjson.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+
+<style>
+    img{
+        max-height:400px;
+        max-width:400px;
+        height:auto;
+        width:auto;
+        border: 2px solid rgb(0, 0, 0);
+    }
+    
+    .wrapper{
+        display: grid;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .input{
+        grid-column :1;
+    }
+
+</style>
+
 <html>
-    <div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Wei%C3%9Fb%C3%BCschelaffe_%28Callithrix_jacchus%29.jpg">
+    <div class="wrapper">
+        <input type="text" placeholder="Name here" id="inputId" class="input">
+        <button  type="button" onclick="getInputValue();" class="input">Get Monkey</button>
+        <p id="monkey_name"></p>
+        <img id="monkey"></img> 
     </div>
+
+    <script>
+        function getInputValue() {
+            let text = document.getElementById("inputId").value;
+            let image = document.getElementById("monkey");
+            let unique_monkey = getMonkey(text);
+            let name = document.getElementById("monkey_name");
+            
+            //Clear image and title
+            name.innerText = "";
+            image.src = "";
+
+            //Update
+            name.innerText = unique_monkey.name;
+            image.src = unique_monkey.url;
+        }
+    </script>
 </html>
