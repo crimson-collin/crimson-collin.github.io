@@ -1,0 +1,1 @@
+//Logic for generating a monkey based on a unique identifier (name, Discord UID)
