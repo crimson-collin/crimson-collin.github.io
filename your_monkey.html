@@ -15,13 +15,28 @@
         border: 2px solid rgb(0, 0, 0);
         border-radius: 1px;
     }
-    
-    .wrapper{
+
+    html{
+        height: 100%;
+        width: 100%;
+
         display: flex;
+        flex-direction: column;
         flex-flow: wrap;
+    }
+
+    .wrapper{
+        height: 100%;
         align-items: center;
-        justify-content: center;
+        justify-content: center;   
+    }
+    .container{
+        height: 100%;
         padding-top: 50px;
+        margin-left: 5%;
+        margin-right: 5%;
+        background-color: ghostwhite;
+        flex: 1;
     }
 
     .input{
@@ -54,6 +69,7 @@
         });
     </script>
 
+    <div class="container">
     <div class="wrapper">
         <input type="text" placeholder="Name here" id="inputId" class="input">
         <button  type="button" onclick="getInputValue();" id="monkey_button" class="input">🐵​</button>
@@ -79,4 +95,5 @@
             image.src = unique_monkey.url;
         }
     </script>
+    </div>
 </html>
