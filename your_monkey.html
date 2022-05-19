@@ -9,23 +9,40 @@
 <style>
     img{
         max-height:400px;
-        max-width:400px;
+        max-width:498px;
         height:auto;
         width:auto;
         border: 2px solid rgb(0, 0, 0);
+        border-radius: 1px;
     }
     
     .wrapper{
-        display: grid;
+        display: flex;
+        flex-flow: wrap;
         align-items: center;
         justify-content: center;
+        padding-top: 50px;
     }
 
     .input{
-        grid-column :1;
+        grid-row:1;
     }
 
+    .money_button{
+        width: 50px;
+    }
+
+    .inputId{
+        width: 500px;
+    }
+
+    .line-break {
+        width: 100%;
+    }
 </style>
+
+<meta charset="UTF-8">
+
 
 <html>
     <div id="menu">
@@ -39,8 +56,10 @@
 
     <div class="wrapper">
         <input type="text" placeholder="Name here" id="inputId" class="input">
-        <button  type="button" onclick="getInputValue();" class="input">Get Monkey</button>
+        <button  type="button" onclick="getInputValue();" id="monkey_button" class="input">🐵​</button>
+        <div class="line-break"></div>
         <p id="monkey_name"></p>
+        <div class="line-break"></div>
         <img id="monkey"></img> 
     </div>
 
