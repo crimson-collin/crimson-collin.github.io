@@ -28,6 +28,15 @@
 </style>
 
 <html>
+    <div id="menu">
+    </div>
+
+    <script>
+        $(function() {
+            $("#menu").load("menu.html");
+        });
+    </script>
+
     <div class="wrapper">
         <input type="text" placeholder="Name here" id="inputId" class="input">
         <button  type="button" onclick="getInputValue();" class="input">Get Monkey</button>
