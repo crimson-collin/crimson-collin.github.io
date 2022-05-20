@@ -13,41 +13,50 @@
         height:auto;
         width:auto;
         border: 2px solid rgb(0, 0, 0);
-        border-radius: 1px;
+        border-radius: 5px;
     }
 
-    .container{
+    body {
+        margin: 0;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
-        flex-wrap: wrap; 
-        height: 100%;
-        width: 100%;
-
-        align-items: center;
-        justify-content: center;  
     }
 
-    .wrapper{
-        align-items: center;
+    .content{
         justify-content: center;  
-        height: 100%;
 
-        margin-left: 5%;
-        margin-right: 5%;
-        background-color: ghostwhite;
+        margin-left: 10%;
+        margin-right: 10%;
+        padding: 5%;
         flex: 1;
+        background-color: ghostwhite;
     }
 
-    #input{
-        grid-row:1;
+    #monkey_button{
+        width: 52px;
+        height: 52px;
+        font-size: 35px;
+        padding: 5px;
+        border:none;
+        border-radius: 50%;
+        background-color: rgb(0, 214, 0);
     }
 
-    #money_button{
-        width: 50px;
+    #monkey_button:hover{
+        background-color: rgb(0, 230, 0);
+        border-radius:2;
+        border-color: rgb(187, 255, 0);
     }
 
     #inputId{
-        width: 450px;
+        width: 400px;
+        margin-right: 50px;
+        flex:none;
+    }
+
+    #monkey{
+        flex:none;
     }
 
     #line-break {
@@ -59,25 +68,24 @@
 
 
 <html>
-    <div id="menu">
-    </div>
+    <body>
+        <div id="menu"></div>
+
+        <div class="content">
+            <input type="text" placeholder="Name here" id="inputId" class="input">
+            <button  type="button" onclick="getInputValue();" id="monkey_button" class="input">🐵​</button>
+            <div class="line-break"></div>
+            <p id="monkey_name"></p>
+            <div class="line-break"></div>
+            <img id="monkey"></img>
+        </div>
+    </body>
 
     <script>
         $(function() {
             $("#menu").load("menu.html");
         });
     </script>
-
-    <div class="container">
-        <div class="wrapper">
-            <input type="text" placeholder="Name here" id="inputId" class="input">
-            <button  type="button" onclick="getInputValue();" id="monkey_button" class="input">🐵​</button>
-            <div class="line-break"></div>
-            <p id="monkey_name"></p>
-            <div class="line-break"></div>
-            <img id="monkey"></img> 
-        </div>
-    </div>
 
     <script>
         function getInputValue() {
