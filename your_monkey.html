@@ -16,42 +16,41 @@
         border-radius: 1px;
     }
 
-    html{
+    .container{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap; 
         height: 100%;
         width: 100%;
 
-        display: flex;
-        flex-direction: column;
-        flex-flow: wrap;
+        align-items: center;
+        justify-content: center;  
     }
 
     .wrapper{
-        height: 100%;
         align-items: center;
-        justify-content: center;   
-    }
-    .container{
+        justify-content: center;  
         height: 100%;
-        padding-top: 50px;
+
         margin-left: 5%;
         margin-right: 5%;
         background-color: ghostwhite;
         flex: 1;
     }
 
-    .input{
+    #input{
         grid-row:1;
     }
 
-    .money_button{
+    #money_button{
         width: 50px;
     }
 
-    .inputId{
-        width: 500px;
+    #inputId{
+        width: 450px;
     }
 
-    .line-break {
+    #line-break {
         width: 100%;
     }
 </style>
@@ -70,13 +69,14 @@
     </script>
 
     <div class="container">
-    <div class="wrapper">
-        <input type="text" placeholder="Name here" id="inputId" class="input">
-        <button  type="button" onclick="getInputValue();" id="monkey_button" class="input">🐵​</button>
-        <div class="line-break"></div>
-        <p id="monkey_name"></p>
-        <div class="line-break"></div>
-        <img id="monkey"></img> 
+        <div class="wrapper">
+            <input type="text" placeholder="Name here" id="inputId" class="input">
+            <button  type="button" onclick="getInputValue();" id="monkey_button" class="input">🐵​</button>
+            <div class="line-break"></div>
+            <p id="monkey_name"></p>
+            <div class="line-break"></div>
+            <img id="monkey"></img> 
+        </div>
     </div>
 
     <script>
@@ -95,5 +95,4 @@
             image.src = unique_monkey.url;
         }
     </script>
-    </div>
 </html>
