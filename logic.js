@@ -1,7 +1,24 @@
+//Load monkeys
+let monkey_data;
+
+function loadMonkeys()
+{
+	$.getJSON("monkeys.json")
+	.fail(function(){
+		console.log("Failed to load monkeys :(");
+	}).then(result => {
+		monkey_data = result;
+	});
+}
+
+function numMonkeys() {
+	return Object.keys(monkey_data).length;
+}
+
 //Logic for generating a monkey based on a unique identifier (name, Discord UID)
 
 function getMonkey(name) {
-    let len = Object.keys(monkey_data).length;
+	let len = numMonkeys();
 	let hashbrowns = CryptoJS.MD5(name);
     let nombre = convertStringToNum(hashbrowns.toString());
     let monkey_number = nombre % len;
@@ -64,4 +81,38 @@ function dec2hex ( textString ) {
 function  dec2hex2 ( textString ) {
 	var hexequiv = new Array ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F");
 	return hexequiv[(textString >> 4) & 0xF] + hexequiv[textString & 0xF];
+}
+
+//Logic for the monkey quiz
+//Generates a random monkey image, gives the user 4 options to guess
+//Can be handled externally (website/discord bot)
+function randomSetUnique(quantity, max){
+	const set = new Set()
+	while(set.size < quantity) {
+	  set.add(Math.floor(Math.random() * max))
+	}
+	return [...set]
+}
+
+function randomizeArray(arr) {
+    var i, j, tmp;
+    for (i = arr.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+    return arr;
+}
+
+function getQuestion() {
+	let monkeys = randomSetUnique(4, numMonkeys());
+	let correct_answer = monkeys[0];
+
+	monkeys = randomizeArray(monkeys);
+
+	return {
+		'answer': correct_answer,
+		'options': monkeys,
+	};
 }

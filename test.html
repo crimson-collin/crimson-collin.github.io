@@ -18,10 +18,21 @@
       background: lightgrey;
       margin-left: 5%;
       margin-right: 5%;
-      padding: 5%;
       flex: 1;
+      display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      align-items: center;
+    }
+
+    #line-break {
+        width: 100%;
+        height: 0px;
+        margin: 0px;
+        border: 0px;
+    }
+
+    .sub{
+      margin: 5px;
     }
 </style>
 
@@ -31,7 +42,9 @@
             <span>A header</span>
         </div>
         <div id="bottom">
-            <span >The content area - extends to the bottom of the page</span>
+            <span class="sub">The content area - extends to the bottom of the page</span>
+            <div id="line-break"></div>
+            <span class="sub">Bruh</span>
         </div>
     <body>
 </html>
