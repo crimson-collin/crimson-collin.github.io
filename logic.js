@@ -1,13 +1,14 @@
 //Load monkeys
 let monkey_data;
 
-function loadMonkeys()
+function loadMonkeys(callback)
 {
 	$.getJSON("monkeys.json")
 	.fail(function(){
 		console.log("Failed to load monkeys :(");
 	}).then(result => {
 		monkey_data = result;
+		callback();
 	});
 }
 
@@ -106,7 +107,12 @@ function randomizeArray(arr) {
 }
 
 function getQuestion() {
-	let monkeys = randomSetUnique(4, numMonkeys());
+	let monkey_nums = randomSetUnique(4, numMonkeys());
+	let monkeys = [];
+	for(let i = 0; i < 4; i++) {
+		monkeys[i] = monkey_data[monkey_nums[i]];
+	}
+
 	let correct_answer = monkeys[0];
 
 	monkeys = randomizeArray(monkeys);

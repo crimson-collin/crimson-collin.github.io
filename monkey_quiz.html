@@ -31,12 +31,44 @@
         font-size: 13px;
     }
 
+    #monkey{
+        max-height:400px;
+        max-width:498px;
+        height:auto;
+        width:auto;
+        border: 2px solid rgb(0, 0, 0);
+        border-radius: 5px;
+        border: none;
+    }
+
+    #answers{
+        display:grid;
+    }
+
+    #button_a, #answer_a{
+        grid-row: 1;
+    }
+
+    #button_b, #answer_b{
+        grid-row: 2;
+    }
+
+    #button_c, #answer_c{
+        grid-row: 3;
+    }
+
+    #button_d, #answer_d{
+        grid-row: 4;
+    }
+    
+
     .monkey_button{
         width: 40px;
         height: 40px;
         font-size: 25px;
         padding: 5px;
         padding-top: 2px;
+        margin: 10px;
         border:none;
         border-radius: 50%;
         background-color: rgb(0, 214, 0);
@@ -46,6 +78,11 @@
         background-color: rgb(0, 230, 0);
         border-radius:2;
         border-color: rgb(187, 255, 0);
+    }
+
+    #score {
+        font-size: 25px;
+        letter-spacing: 2px;
     }
 
     .line-break {
@@ -64,27 +101,34 @@
             <h1>
                 Monkey Quiz
             </h1>
+            <div class="line-break"></div>
             <p id="intro">
                 Test your knowledge of monkeys! 
                 This game helps you identify almost 150 different monkey species.
             </p>
             <div class="line-break"></div>
-
-            <button onclick="getInputValue();" id="button_a" class="monkey_button">A</button>
-            <p class="answer" id="answer_a"></p>
-            <div class="line-break"></div>
-
-            <button onclick="getInputValue();" id="button_b" class="monkey_button">B</button>
-            <p class="answer" id="answer_b"></p>
-            <div class="line-break"></div>
             
-            <button onclick="getInputValue();" id="button_a" class="monkey_button">C</button>
-            <p class="answer" id="answer_c"></p>
+            <img id="monkey"></img>
+
             <div class="line-break"></div>
 
-            <button onclick="getInputValue();" id="button_d" class="monkey_button">D</button>
-            <p class="answer" id="answer_d"></p>
+            <div id="answers">
+                <button onclick="checkAnswer('a');" id="button_a" class="monkey_button">A</button>
+                <p class="answer" id="answer_a"></p>
+
+                <button onclick="checkAnswer('b');" id="button_b" class="monkey_button">B</button>
+                <p class="answer" id="answer_b"></p>
+                
+                <button onclick="checkAnswer('c');" id="button_c" class="monkey_button">C</button>
+                <p class="answer" id="answer_c"></p>
+
+                <button onclick="checkAnswer('d');" id="button_d" class="monkey_button">D</button>
+                <p class="answer" id="answer_d"></p>
+            </div>
+
             <div class="line-break"></div>
+
+            <p id="score">0/0</p>
         </div>
     </body>
 
@@ -93,10 +137,94 @@
             $("#menu").load("menu.html");
         });
 
-        loadMonkeys();
-    </script>
+        loadMonkeys(newQuestion);
 
-    <script>
-        
+        let current_question;
+        let correct_questions = 0;
+        let total_questions = 0;
+
+        function choiceToNum(choice) {
+            switch(choice) {
+                case 'a':
+                    return 0;
+                break;
+                case 'b':
+                    return 1;
+                break;
+                case 'c':
+                    return 2;
+                break;
+                case 'd':
+                    return 3;
+                break;
+            }
+        }
+
+        function numToChoice(num) {
+            switch(num) {
+                case 0:
+                    return 'a';
+                break;
+                case 1:
+                    return 'b';
+                break;
+                case 2:
+                    return 'c';
+                break;
+                case 3:
+                    return 'd';
+                break;
+            }
+        }
+
+        function updateScore() {
+            let score = document.getElementById("score");
+            score.innerText = correct_questions.toString() + "/" + total_questions.toString();
+        }
+
+        function checkAnswer(choice) {
+            let option_num = choiceToNum(choice);
+            
+            function showAnswer() {
+                for(let i = 0; i < 4; i++) {
+                    if(current_question.options[i] === current_question.answer) {
+                        document.getElementById('button_' + numToChoice(i)).innerHTML = "✔️";
+                    }
+                }
+            }
+
+            if(current_question.options[option_num] === current_question.answer) {
+                correct_questions++; 
+            } else {
+                document.getElementById('button_' + choice).innerHTML = "❌";
+            }
+
+            showAnswer();
+            updateScore();
+
+            setTimeout(function () {
+                for(let i = 0; i < 4; i++) {
+                    let letter = numToChoice(i);
+                    document.getElementById('button_' + letter).innerHTML = letter.toUpperCase();
+                }
+
+                newQuestion();
+            }, 2000); 
+        }
+
+        function newQuestion() {
+            current_question = getQuestion();
+
+            let monkey_image = document.getElementById('monkey');
+            monkey_image.src = current_question.answer.url;
+            monkey_image.style.border = '2px solid rgb(0, 0, 0)';
+
+            document.getElementById('answer_a').innerText = current_question.options[0].name;
+            document.getElementById('answer_b').innerText = current_question.options[1].name;
+            document.getElementById('answer_c').innerText = current_question.options[2].name;
+            document.getElementById('answer_d').innerText = current_question.options[3].name;
+
+            total_questions++;
+        }
     </script>
 </html>
